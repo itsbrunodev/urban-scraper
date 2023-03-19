@@ -1,4 +1,4 @@
-import { request } from "undici";
+import fetch from "node-fetch";
 import * as cheerio from "cheerio";
 
 export interface Term {
@@ -29,20 +29,31 @@ function format(termData: Term, formatMarkdown = false): Term {
   const { found, description, example } = termData;
 
   if (found) {
-    const obj: Term = {
-      ...termData,
-      description: description.replace(newLine, "\n"),
-      example: example.replace(newLine, "\n"),
-    };
-
     if (formatMarkdown) {
-      obj.description = obj.description
-        .replace(link, linkStr)
-        .replace(linkEnd, "");
-      obj.example = obj.example.replace(link, linkStr).replace(linkEnd, "");
+      return {
+        ...termData,
+        description: description
+          .replace(newLine, "\n")
+          .replace(link, linkStr)
+          .replace(linkEnd, ""),
+        example: example
+          .replace(newLine, "\n")
+          .replace(link, linkStr)
+          .replace(linkEnd, ""),
+      } as Term;
     }
 
-    return obj;
+    return {
+      ...termData,
+      description: description
+        .replace(newLine, "\n")
+        .replace(link, "$<text>")
+        .replace(linkEnd, ""),
+      example: example
+        .replace(newLine, "\n")
+        .replace(link, "$<text>")
+        .replace(linkEnd, ""),
+    } as Term;
   } else return termData;
 }
 
@@ -51,11 +62,10 @@ async function get(str: string, random = false) {
     random ? `random.php` : `define.php?term=${str}`
   }`;
 
-  const { body } = await request(url, {
-    maxRedirections: 1 /* this is only set to 1 because sometimes urban redirects you to another term */,
-  });
+  const html = await fetch(url, { redirect: "follow" }).then(
+    async (x) => await x.text()
+  );
 
-  const html = await body.text();
   const $ = cheerio.load(html);
 
   /* check if the term wasn't found */
