@@ -61,7 +61,7 @@ async function get(str: string, random = false) {
   /* check if the term wasn't found */
   const notFound = $(notFoundSelector).html();
 
-  if (notFound.startsWith("Sorry, we couldn't find:"))
+  if (notFound?.startsWith("Sorry, we couldn't find:"))
     return { found: false } as Term;
 
   /* get the term name */
