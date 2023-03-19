@@ -1,19 +1,25 @@
 {
   "name": "urban-scraper",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Scraper for the Urban Dictionary.",
   "files": [
     "dist/**/*"
   ],
+  "homepage": "https://github.com/brunolepis/urban-scraper",
   "main": "dist/index.js",
-  "types": "dist/types.d.ts",
+  "types": "dist/index.d.ts",
   "type": "module",
   "scripts": {
     "build": "tsc",
     "dev": "node --loader ts-node/esm --watch ./src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": [
+    "scraper",
+    "scrape",
+    "urban-dictionary",
+    "urban"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
