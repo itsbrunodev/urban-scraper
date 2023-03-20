@@ -10,11 +10,12 @@ npm install urban-scraper
 ### Usage
 ```js
 // get a specific term
-await getTerm("urban")
+await getTerm("urban");
 
 // get a specific term with markdown formatting
-await getTerm("urban", true)
+await getTerm("urban", true);
 
 // get a random term
-await getRandom()
+await getRandom();
 ```
+
