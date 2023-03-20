@@ -154,5 +154,3 @@ export async function getRandom(formatMarkdown = false) {
 
   return format(termData, formatMarkdown);
 }
-
-console.log(await getTerm("discord"));
