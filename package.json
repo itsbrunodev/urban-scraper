@@ -1,6 +1,6 @@
 {
   "name": "urban-scraper",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Scraper for the Urban Dictionary.",
   "files": [
     "dist/**/*"
@@ -11,7 +11,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
-    "dev": "node --loader ts-node/esm --watch ./src/index.ts",
+    "dev": "node --loader ts-node/esm ./src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
