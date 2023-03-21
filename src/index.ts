@@ -144,7 +144,7 @@ export async function getTerm(
 /**
  * Get a random term with its description and the example from the urban dictionary
  * @param {boolean} formatMarkdown - Wether to format the term description and the example for markdown
- * @example await getTerm("urban")
+ * @example await getRandom()
  */
 export async function getRandom(formatMarkdown = false) {
   if (typeof formatMarkdown !== "boolean")

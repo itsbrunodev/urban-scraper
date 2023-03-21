@@ -1,6 +1,6 @@
 {
   "name": "urban-scraper",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Scraper for the Urban Dictionary.",
   "files": [
     "dist/**/*"
