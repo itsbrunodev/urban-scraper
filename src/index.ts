@@ -41,7 +41,7 @@ const termIdRegex = /[\w:\/.?]+defid=(?<termId>[\d]+)/;
 function format(termData: Term, formatMarkdown = false): Term {
   const { found, description, example } = termData;
 
-  if (found) {
+  if (found && description && example) {
     if (formatMarkdown) {
       return {
         ...termData,

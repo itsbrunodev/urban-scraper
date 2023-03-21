@@ -1,16 +1,23 @@
 {
   "name": "urban-scraper",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Scraper for the Urban Dictionary.",
   "files": [
     "dist/**/*"
   ],
   "homepage": "https://github.com/brunolepis/urban-scraper",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/cjs/index.js",
+  "module": "dist/mjs/index.js",
+  "types": "dist/mjs/index.d.ts",
   "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/mjs/index.js",
+      "require": "./dist/cjs/index.js"
+    }
+  },
   "scripts": {
-    "build": "tsc",
+    "build": "del /s /q dist\\ && tsc -p tsconfig.mjs.json && tsc -p tsconfig.cjs.json && bash build.sh",
     "dev": "node --loader ts-node/esm ./src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -24,12 +31,13 @@
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^18.15.3",
+    "@types/node-fetch": "^2.6.2",
     "ts-node": "^10.9.1",
     "tslib": "^2.5.0",
     "typescript": "^5.0.2"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.12",
-    "node-fetch": "^3.3.1"
+    "node-fetch": "^2.6.9"
   }
 }
