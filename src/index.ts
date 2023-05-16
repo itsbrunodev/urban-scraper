@@ -134,7 +134,7 @@ export async function getTerm(
   if (!str || str.length === 0 || typeof str !== "string")
     throw new Error("Provide a term to search for");
   if (typeof formatMarkdown !== "boolean")
-    throw new Error("Format markdown options needs to be a boolean");
+    throw new Error("Format markdown option needs to be a boolean");
 
   const termData = await get(str);
 
@@ -148,7 +148,7 @@ export async function getTerm(
  */
 export async function getRandom(formatMarkdown = false) {
   if (typeof formatMarkdown !== "boolean")
-    throw new Error("Format markdown options needs to be a boolean");
+    throw new Error("Format markdown option needs to be a boolean");
 
   const termData = await get("", true);
 
