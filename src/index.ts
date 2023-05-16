@@ -124,8 +124,8 @@ async function get(str: string, random = false) {
 /**
  * Get a term with its description and the example from the urban dictionary
  * @param {string} str - The term name
- * @param {boolean} formatMarkdown - Wether to format the term description and the example for markdown
- * @example await getTerm("urban")
+ * @param {boolean} formatMarkdown - Whether to format the term description and the example for markdown
+ * @example await getTerm("urban");
  */
 export async function getTerm(
   str: string,
@@ -143,8 +143,8 @@ export async function getTerm(
 
 /**
  * Get a random term with its description and the example from the urban dictionary
- * @param {boolean} formatMarkdown - Wether to format the term description and the example for markdown
- * @example await getRandom()
+ * @param {boolean} formatMarkdown - Whether to format the term description and the example for markdown
+ * @example await getRandom();
  */
 export async function getRandom(formatMarkdown = false) {
   if (typeof formatMarkdown !== "boolean")
