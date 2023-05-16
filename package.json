@@ -1,25 +1,23 @@
 {
   "name": "urban-scraper",
-  "version": "1.0.7",
+  "version": "1.1.0",
   "description": "Scraper for the Urban Dictionary.",
   "files": [
     "dist/**/*"
   ],
   "homepage": "https://github.com/brunolepis/urban-scraper",
-  "main": "dist/cjs/index.js",
-  "module": "dist/mjs/index.js",
-  "types": "dist/mjs/index.d.ts",
+  "main": "dist/cjs/index.cjs",
+  "module": "dist/esm/index.mjs",
+  "types": "./dist/types/index.d.ts",
   "type": "module",
   "exports": {
-    ".": {
-      "import": "./dist/mjs/index.js",
-      "require": "./dist/cjs/index.js"
-    }
+    "import": "./dist/esm/index.mjs",
+    "require": "./dist/cjs/index.cjs",
+    "default": "./dist/esm/index.mjs"
   },
   "scripts": {
-    "build": "del /s /q dist\\ && tsc -p tsconfig.mjs.json && tsc -p tsconfig.cjs.json && bash build.sh",
-    "dev": "node --loader ts-node/esm ./src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "esbuild --out-extension:.js=.cjs --outdir=dist/cjs --platform=node --format=cjs src/index.ts --tsconfig=tsconfig.cjs.json && esbuild --out-extension:.js=.mjs --outdir=dist/esm --platform=node --format=esm src/index.ts --tsconfig=tsconfig.mjs.json && tsc --emitDeclarationOnly -p tsconfig.mjs.json",
+    "dev": "ts-node -P tsconfig.mjs.json ./src/index.ts"
   },
   "keywords": [
     "scraper",
@@ -30,14 +28,14 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^18.15.3",
-    "@types/node-fetch": "^2.6.2",
+    "@types/node": "^20.1.5",
+    "@types/node-fetch": "^2.6.4",
+    "esbuild": "^0.17.19",
     "ts-node": "^10.9.1",
-    "tslib": "^2.5.0",
-    "typescript": "^5.0.2"
+    "typescript": "^5.0.4"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.12",
-    "node-fetch": "^2.6.9"
+    "node-fetch": "^3.3.1"
   }
 }
