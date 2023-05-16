@@ -1,6 +1,15 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "dist/mjs"
+    "target": "ES2017",
+    "outDir": "dist/esm",
+    "declaration": true,
+    "declarationDir": "dist/types",
+    "esModuleInterop": true,
+    "module": "ESNext"
+  },
+  "ts-node": {
+    "esm": true,
+    "transpileOnly": true
   }
 }
