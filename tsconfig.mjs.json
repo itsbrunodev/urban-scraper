@@ -5,8 +5,8 @@
     "outDir": "dist/esm",
     "declaration": true,
     "declarationDir": "dist/types",
-    "esModuleInterop": true,
-    "module": "ESNext"
+    "module": "ESNext",
+    "allowSyntheticDefaultImports": true
   },
   "ts-node": {
     "esm": true,
