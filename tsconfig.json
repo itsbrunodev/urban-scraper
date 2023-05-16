@@ -2,7 +2,8 @@
   "compilerOptions": {
     "allowJs": true,
     "sourceMap": true,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "declaration": true
   },
   "exclude": ["node_modules", ".vscode", "dist"],
   "include": ["src/**/*"]
