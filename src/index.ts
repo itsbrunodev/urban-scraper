@@ -45,33 +45,19 @@ const termIdRegex = /[\w:\/.?]+defid=(?<termId>[\d]+)/;
 function format(termData: Term, formatMarkdown = false): Term {
   const { found, description, example } = termData;
 
-  if (found && description && example) {
-    if (formatMarkdown) {
-      return {
-        ...termData,
-        description: description
-          .replace(newLine, "\n")
-          .replace(link, linkStr)
-          .replace(linkEnd, ""),
-        example: example
-          .replace(newLine, "\n")
-          .replace(link, linkStr)
-          .replace(linkEnd, ""),
-      } as Term;
-    }
-
+  if (found && description && example)
     return {
       ...termData,
       description: description
         .replace(newLine, "\n")
-        .replace(link, "$<text>")
+        .replace(link, formatMarkdown ? linkStr : "$<text>")
         .replace(linkEnd, ""),
       example: example
         .replace(newLine, "\n")
-        .replace(link, "$<text>")
+        .replace(link, formatMarkdown ? linkStr : "$<text>")
         .replace(linkEnd, ""),
     } as Term;
-  } else return termData;
+  else return termData;
 }
 
 async function get(str: string, random = false) {
@@ -114,7 +100,7 @@ async function get(str: string, random = false) {
   const termId = $(termIdSelector);
   const id = Number(termId[0].attribs.href.replace(termIdRegex, "$<termId>"));
 
-  /* get the term's like and dislike count */
+  /* get the term's thumbs up and down count */
   const thumbs = await fetch(
     `https://api.urbandictionary.com/v0/uncacheable?ids=${id}`
   )
