@@ -7,11 +7,15 @@ export interface Term {
   id?: number;
   description?: string;
   example?: string;
+  createdAt?: Date;
   author?: {
     name: string;
     url: string;
   };
-  createdAt?: Date;
+  thumbs?: {
+    up: number;
+    down: number;
+  };
 }
 
 const notFoundSelector =
@@ -110,14 +114,30 @@ async function get(str: string, random = false) {
   const termId = $(termIdSelector);
   const id = Number(termId[0].attribs.href.replace(termIdRegex, "$<termId>"));
 
+  /* get the term's like and dislike count */
+  const thumbs = await fetch(
+    `https://api.urbandictionary.com/v0/uncacheable?ids=${id}`
+  )
+    .then(
+      async (x) =>
+        (await x.json()) as {
+          thumbs: { up: number; down: number }[];
+        }
+    )
+    .then((x) => ({
+      up: x.thumbs[0].up,
+      down: x.thumbs[0].down,
+    }));
+
   return {
     found: true,
     term,
     id,
     description,
     example,
-    author: { name, url },
     createdAt,
+    author: { name, url },
+    thumbs,
   } as Term;
 }
 
