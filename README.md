@@ -30,10 +30,11 @@ await getRandom();
   id: 11468038,
   description: "when ur too lazy to type out urban dictionary",
   example: 'I wonder how urban dictionary is defined in the urban dictionary. hmmm. "urban....clicks enter"',
+  createdAt: 2017-04-21T22:00:00.000Z,
   author: {
     name: "fghjkm",
     url: "https://www.urbandictionary.com/author.php?author=fghjkm"
   },
-  createdAt: 2017-04-21T22:00:00.000Z
+  thumbs: { up: 8183, down: 911 }
 }
 ```
