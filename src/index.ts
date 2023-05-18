@@ -5,6 +5,7 @@ export interface Term {
   found: boolean;
   term?: string;
   id?: number;
+  url?: string;
   description?: string;
   example?: string;
   createdAt?: Date;
@@ -18,20 +19,22 @@ export interface Term {
   };
 }
 
+interface ElementAttrib {
+  attribs: {
+    [name: string]: string;
+  };
+}
+
 const notFoundSelector =
   "#ud-root > div > main > div > div > section > div > div.font-bold.text-2xl.my-8";
-const termSelector =
-  "#ud-root > div > main > div > div > section > div:nth-child(1) > div > div > h1 > a";
-const descriptionSelector =
-  "#ud-root > div > main > div > div.flex.flex-col.mx-0.gap-4 > section > div:nth-child(1) > div > div.break-words.meaning.mb-4";
-const exampleSelector =
-  "#ud-root > div > main > div > div.flex.flex-col.mx-0.gap-4 > section > div:nth-child(1) > div > div.break-words.example.italic.mb-4";
-const authorSelector =
-  "#ud-root > div > main > div > div.flex.flex-col.mx-0.gap-4 > section > div:nth-child(1) > div > div.contributor.font-bold > a";
-const dateSelector =
-  "#ud-root > div > main > div > div.flex.flex-col.mx-0.gap-4 > section > div:nth-child(1) > div > div.contributor.font-bold";
-const termIdSelector =
-  "#ud-root > div > main > div > div.flex.flex-col.mx-0.gap-4 > section > div:nth-child(1) > a";
+const termWrapper =
+  "#ud-root > div > main > div > div > section > div:nth-child(1)";
+const termSelector = `${termWrapper} > div > div > h1 > a`;
+const descriptionSelector = `${termWrapper} > div > div.break-words.meaning.mb-4`;
+const exampleSelector = `${termWrapper} > div > div.break-words.example.italic.mb-4`;
+const authorSelector = `${termWrapper} > div > div.contributor.font-bold > a`;
+const dateSelector = `${termWrapper} > div > div.contributor.font-bold`;
+const termIdSelector = `${termWrapper} > a`;
 
 /* for markdown formatting */
 const link =
@@ -60,6 +63,9 @@ function format(termData: Term, formatMarkdown = false): Term {
   else return termData;
 }
 
+/**
+ * The function to fetch data for the `getTerm` and `getRandom` function
+ */
 async function get(str: string, random = false) {
   const termUrl = `https://www.urbandictionary.com/${
     random ? `random.php` : `define.php?term=${str}`
@@ -89,7 +95,9 @@ async function get(str: string, random = false) {
   /* get the author of the term */
   const author = $(authorSelector);
   const name = author.html();
-  const url = `https://www.urbandictionary.com${author[0].attribs.href}`;
+  const authorUrl = `https://www.urbandictionary.com${
+    (author[0] as ElementAttrib).attribs.href
+  }`;
 
   /* get when the term was created */
   const date = $(dateSelector);
@@ -98,7 +106,9 @@ async function get(str: string, random = false) {
 
   /* get the term id */
   const termId = $(termIdSelector);
-  const id = Number(termId[0].attribs.href.replace(termIdRegex, "$<termId>"));
+  const id = Number(
+    (termId[0] as ElementAttrib).attribs.href.replace(termIdRegex, "$<termId>")
+  );
 
   /* get the term's thumbs up and down count */
   const thumbs = await fetch(
@@ -115,14 +125,18 @@ async function get(str: string, random = false) {
       down: x.thumbs[0].down,
     }));
 
+  /* get the term's url */
+  const url = `https://www.urbandictionary.com/define.php?term=${term}&defid=${id}`;
+
   return {
     found: true,
     term,
     id,
+    url,
     description,
     example,
     createdAt,
-    author: { name, url },
+    author: { name, url: authorUrl },
     thumbs,
   } as Term;
 }
