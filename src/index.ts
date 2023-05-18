@@ -3,7 +3,7 @@ import * as cheerio from "cheerio";
 
 export interface Term {
   found: boolean;
-  term?: string;
+  term: string;
   id?: number;
   url?: string;
   description?: string;
@@ -81,7 +81,7 @@ async function get(str: string, random = false) {
   const notFound = $(notFoundSelector).html();
 
   if (notFound?.startsWith("Sorry, we couldn't find:"))
-    return { found: false } as Term;
+    return { found: false, term: str } as Term;
 
   /* get the term name */
   const term = $(termSelector).html();
@@ -141,6 +141,14 @@ async function get(str: string, random = false) {
   } as Term;
 }
 
+export async function getTerm(
+  str: string,
+  formatMarkdown: boolean
+): Promise<Term>;
+export async function getTerm(
+  str: string[],
+  formatMarkdown: boolean
+): Promise<Term[]>;
 /**
  * Get a term with its description and the example from the urban dictionary
  * @param {string} str - The term name
@@ -148,13 +156,21 @@ async function get(str: string, random = false) {
  * @example await getTerm("urban");
  */
 export async function getTerm(
-  str: string,
+  str: string | string[],
   formatMarkdown = false
-): Promise<Term> {
-  if (!str || str.length === 0 || typeof str !== "string")
-    throw new Error("Provide a term to search for");
+): Promise<Term | Term[]> {
+  if (!str || str.length === 0) throw new Error("Provide a term to search for");
   if (typeof formatMarkdown !== "boolean")
     throw new Error("Format markdown option needs to be a boolean");
+
+  if (Array.isArray(str)) {
+    const responses: Term[] = [];
+    for (const query of str) {
+      const termData = await get(query);
+      responses.push(format(termData, formatMarkdown));
+    }
+    return responses;
+  }
 
   const termData = await get(str);
 
