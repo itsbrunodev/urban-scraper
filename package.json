@@ -27,7 +27,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^20.1.5",
+    "@types/node": "^20.2.1",
     "@types/node-fetch": "^2.6.4",
     "esbuild": "^0.17.19",
     "ts-node": "^10.9.1",
