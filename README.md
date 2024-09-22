@@ -1,24 +1,35 @@
 ## urban-scraper
 
-A package that scrapes the [Urban Dictionary](https://www.urbandictionary.com/).
+A package for scraping terms and their definitions from the [Urban Dictionary](https://www.urbandictionary.com/).
 
 ### Installation
 
 ```
-npm install urban-scraper
+npm add urban-scraper
+yarn add urban-scraper
+pnpm add urban-scraper
 ```
 
 ### Usage
 
 ```js
-// get a specific term
+// get a single term
 await getTerm("urban");
 
+// get multiple terms
+await getTerm(["urban", "cool"]);
+
 // get a specific term with markdown formatting
-await getTerm("urban", true);
+await getTerm("urban", { formatMarkdown: true });
+
+// get multiple terms with markdown formatting
+await getTerm(["urban", "cool"], { formatMarkdown: true });
 
 // get a random term
 await getRandom();
+
+// get a random term with markdown formatting
+await getRandom({ formatMarkdown: true });
 ```
 
 ### Example response

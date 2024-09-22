@@ -1,9 +1,10 @@
 {
+  "extends": "@tsconfig/recommended/tsconfig.json",
+  "include": ["src", "types"],
   "compilerOptions": {
-    "allowJs": true,
+    "target": "esnext",
+    "module": "esnext",
     "moduleResolution": "node",
-    "baseUrl": "src"
-  },
-  "exclude": ["node_modules", ".vscode", "dist"],
-  "include": ["src/**/*"]
+    "allowImportingTsExtensions": false
+  }
 }

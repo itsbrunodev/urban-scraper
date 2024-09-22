@@ -1,40 +1,65 @@
 {
   "name": "urban-scraper",
-  "version": "1.2.4",
-  "description": "Scraper for the Urban Dictionary.",
-  "files": [
-    "dist/**/*"
-  ],
-  "homepage": "https://github.com/itsbrunodev/urban-scraper",
-  "main": "dist/index.cjs",
-  "types": "dist/types/index.d.ts",
-  "exports": {
-    "import": "./dist/index.mjs",
-    "require": "./dist/index.cjs",
-    "default": "./dist/index.mjs",
-    "types": "./dist/types/index.d.ts"
-  },
-  "scripts": {
-    "build": "esbuild --out-extension:.js=.cjs --outdir=dist --platform=node --format=cjs src/index.ts --tsconfig=tsconfig.cjs.json && esbuild --out-extension:.js=.mjs --outdir=dist --platform=node --format=esm src/index.ts --tsconfig=tsconfig.mjs.json && tsc --emitDeclarationOnly -p tsconfig.cjs.json",
-    "dev": "ts-node -P tsconfig.mjs.json ./src/index.ts"
-  },
-  "keywords": [
-    "scraper",
-    "scrape",
-    "urban-dictionary",
-    "urban"
-  ],
-  "author": "",
+  "version": "2.0.0",
   "license": "MIT",
+  "author": "brunolepis",
+  "main": "dist/index.js",
+  "module": "dist/urban-scraper-dts.esm.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "analyze": "size-limit --why",
+    "build": "dts build",
+    "lint": "dts lint",
+    "prepare": "dts build",
+    "size": "size-limit",
+    "start": "dts watch",
+    "test": "dts test"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "dts lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "tabWidth": 2,
+    "semi": true,
+    "singleQuote": false,
+    "trailingComma": "es5"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "engines": {
+    "node": ">=12"
+  },
+  "size-limit": [
+    {
+      "path": "dist/urban-scraper-dts.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/urban-scraper-dts.esm.js",
+      "limit": "10 KB"
+    }
+  ],
   "devDependencies": {
-    "@types/node": "^20.2.1",
-    "@types/node-fetch": "^2.6.4",
-    "esbuild": "^0.17.19",
-    "ts-node": "^10.9.1",
-    "typescript": "^5.0.4"
+    "@size-limit/preset-small-lib": "^11.1.5",
+    "@tsconfig/recommended": "^1.0.7",
+    "@types/jest": "^29.5.13",
+    "@types/node-fetch": "^2.6.11",
+    "dts-cli": "^2.0.5",
+    "husky": "^9.1.6",
+    "size-limit": "^11.1.5",
+    "tslib": "^2.7.0",
+    "typescript": "^5.6.2"
   },
   "dependencies": {
-    "cheerio": "^1.0.0-rc.12",
-    "node-fetch": "^2.6.11"
+    "cheerio": "^1.0.0",
+    "node-fetch": "2"
   }
 }
