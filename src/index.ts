@@ -1,7 +1,9 @@
 import { Options, Term } from "./types";
 import { format, get } from "./utils";
 
-export async function getTerm(str: string, options?: Options): Promise<Term>;
+export { Options, Term };
+
+export async function getTerm(query: string, options?: Options): Promise<Term>;
 export async function getTerm(
   str: string[],
   options?: Options
