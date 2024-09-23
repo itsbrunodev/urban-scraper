@@ -4,7 +4,7 @@
   "license": "MIT",
   "author": "brunolepis",
   "main": "dist/index.js",
-  "module": "dist/urban-scraper-dts.esm.js",
+  "module": "dist/urban-scraper.esm.js",
   "typings": "dist/index.d.ts",
   "files": [
     "dist",
@@ -36,19 +36,21 @@
     "globalSetup": "./global-setup.js"
   },
   "engines": {
-    "node": ">=12"
+    "node": ">=18"
   },
   "size-limit": [
     {
-      "path": "dist/urban-scraper-dts.cjs.production.min.js",
+      "path": "dist/urban-scraper.cjs.production.min.js",
       "limit": "10 KB"
     },
     {
-      "path": "dist/urban-scraper-dts.esm.js",
+      "path": "dist/urban-scraper.esm.js",
       "limit": "10 KB"
     }
   ],
   "devDependencies": {
+    "@size-limit/esbuild": "^11.1.5",
+    "@size-limit/esbuild-why": "^11.1.5",
     "@size-limit/preset-small-lib": "^11.1.5",
     "@tsconfig/recommended": "^1.0.7",
     "@types/jest": "^29.5.13",
