@@ -3,6 +3,12 @@
   "version": "2.0.1",
   "license": "MIT",
   "author": "brunolepis",
+  "keywords": [
+    "scraper",
+    "scrape",
+    "urban-dictionary",
+    "urban"
+  ],
   "main": "dist/index.js",
   "module": "dist/urban-scraper.esm.js",
   "typings": "dist/index.d.ts",
