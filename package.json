@@ -32,7 +32,8 @@
     "trailingComma": "es5"
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "globalSetup": "./global-setup.js"
   },
   "engines": {
     "node": ">=12"

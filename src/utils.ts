@@ -96,7 +96,17 @@ export async function get(str: string, random = false) {
   /* get when the term was created */
   const date = $(DATE_SELECTOR);
   const dateString = (date.children()[0].next as { data: string }).data.trim();
-  const createdAt = new Date(dateString);
+  const createdAt = new Date(
+    Date.UTC(
+      new Date(dateString).getFullYear(),
+      new Date(dateString).getMonth(),
+      new Date(dateString).getDate(),
+      new Date(dateString).getHours(),
+      new Date(dateString).getMinutes(),
+      new Date(dateString).getSeconds(),
+      new Date(dateString).getMilliseconds()
+    )
+  );
 
   /* get the term id */
   const termId = $(TERM_ID_SELECTOR);

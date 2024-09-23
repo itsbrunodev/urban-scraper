@@ -12,7 +12,7 @@ describe("getTerm function", () => {
         description: "when ur too lazy to type out urban dictionary",
         example:
           'I wonder how urban dictionary is defined in the urban dictionary. hmmm. "urban....clicks enter"',
-        createdAt: new Date("2017-04-21T22:00:00.000Z"),
+        createdAt: new Date("2017-04-22T00:00:00.000Z"),
         author: {
           name: "fghjkm",
           url: "https://www.urbandictionary.com/author.php?author=fghjkm",
@@ -32,7 +32,7 @@ describe("getTerm function", () => {
           "when ur too [lazy](https://www.urbandictionary.com/define.php?term=lazy) to [type out](https://www.urbandictionary.com/define.php?term=type%20out) [urban dictionary](https://www.urbandictionary.com/define.php?term=urban%20dictionary)",
         example:
           'I wonder how urban dictionary is defined in [the urban dictionary](https://www.urbandictionary.com/define.php?term=the%20urban%20dictionary). [hmmm](https://www.urbandictionary.com/define.php?term=hmmm). "urban....[clicks enter](https://www.urbandictionary.com/define.php?term=clicks%20enter)"',
-        createdAt: new Date("2017-04-21T22:00:00.000Z"),
+        createdAt: new Date("2017-04-22T00:00:00.000Z"),
         author: {
           name: "fghjkm",
           url: "https://www.urbandictionary.com/author.php?author=fghjkm",
